@@ -1,0 +1,203 @@
+/* The animation code */
+@keyframes opacityModal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes opacityMask {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.75;
+  }
+}
+
+/* The administration panel*/
+.cco-admin-field {
+  width: 90%;
+}
+
+.cco-admin-field-style {
+  width: 90%;
+  height: 250px;
+}
+
+.cco-admin-logo {
+  width: 300px;
+  margin-top: 15px;
+}
+
+/* Widget */
+.cco-container-powered-by {
+  text-align: center;
+  line-height: 0;
+}
+
+.cco-powered-by {
+  font-size: 10px;
+  /* position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 15px;
+  width: 200px;
+  text-align: left; */
+}
+
+.cco-powered-by-text {
+  display: inline-block;
+  line-height: 15px;
+}
+
+.cco-powered-by-image {
+  margin-left: 10px;
+  line-height: 15px;
+}
+
+.cco-modal-button-x {
+  position: absolute;
+  right: 15px;
+  height: 26px;
+  width: 26px;
+  padding: 0px;
+  font-size: 14px;
+  border: 0px;
+  background-color: transparent !important;
+  border-radius: 6px;
+}
+
+.cco-button {
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  color: red;
+  line-height: 45px;
+  font-size: 25px;
+  border: 5px solid #ffffff;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
+  /* background-image: url(../../../../wp-content/plugins/call-center-online/image/logo-390.png); */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #ffffff !important;
+  transition: transform .6s ease-in-out;
+
+}
+
+.cco-button:hover {
+  border: 5px solid #ffffff;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
+  outline-offset: 0;
+  outline: unset;
+  transform: rotate(-30deg);
+}
+
+.cco-mask {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  opacity: 0.75;
+  position: fixed;
+  top: 0;
+  left: 0;
+  max-width: none !important;
+  animation-name: opacityMask;
+  animation-duration: 0.2s;
+}
+
+.cco-modal {
+  width: 500px;
+  background-color: #ffffff;
+  margin: 0 auto;
+  border-radius: 10px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+
+  animation-name: opacityModal;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in;
+}
+.cco-title {
+  padding: 8px 15px 8px 15px;
+  background-color: blue;
+  border-radius: 10px 6px 0 0;
+  height: 44px;
+  color: #fff;
+  font-size: 16px;
+}
+.cco-container-buttons {
+  width: 100%;
+  padding: 15px 15px 11px 15px;
+  text-align: right;
+}
+
+.cco-buttons {
+ margin-bottom: 10px;
+}
+
+.cco-buttons-end {
+  text-align: center;
+}
+
+.cco-modal-button {
+  height: 26px;
+  font-size: 12px;
+  line-height: 0px;
+  padding: 5px 30px;
+  text-align: right;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+.cco-modal-button-primary {
+  background-color: blue !important;
+  color: #fff !important;
+  border: 1px solid blue;
+}
+.cco-modal-button-secondary {
+  background-color: white !important;
+  color: #000 !important;
+  border: 1px solid blue;
+}
+.cco-body {
+  font-size: 16px;
+  padding: 10px 15px 0px 15px;
+}
+
+.cco-body-end {
+  text-align: center;
+  padding-top: 15px;
+}
+
+.cco-label {
+  display: block;
+  font-size: 13px;
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+.cco-field {
+  font-size: 13px;
+  margin: 0 !important;
+  padding: 5px 10px !important;
+  width: 100%;
+  border: 1px solid gray !important;
+  border-radius: 4px !important;
+}
+.cco-text-after {
+  font-size: 12px;
+  font-weight: lighter;
+  margin-top: 15px;
+}
+
+.cco-text-before {
+  font-size: 16px;
+  font-weight: bold;
+}
