@@ -1,18 +1,17 @@
 == Call Center Online ==
-
-Author: Jacek Łoziński
-Tags: call button, click to call, call now button, call me, contact button, call center online, cco
-
-Requires at least: 3.7
-Tested up to: 5.7.1
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-
-A simple-to-use plugin that works with the Call Center Online platform. Adds a button to collect contacts on your website.
-
-
-== Description ==
-
+<br />
+Author: Jacek Łoziński<br />
+Tags: call button, click to call, call now button, call me, contact button, call center online, cco<br />
+Requires at least: 3.7<br />
+Tested up to: 5.7.1<br />
+License: GPLv2 or later<br />
+License URI: http://www.gnu.org/licenses/gpl-2.0.html<br />
+<br />
+A simple-to-use plugin that works with the Call Center Online platform. Adds a button to collect contacts on your website.<br />
+<br />
+<br />
+== Description ==<br />
+<br />
 ###What is this plugin for?
 
 The plugin allows for integration via the API interface with the Call Center Online platform (https://callcenteronline.pl).
