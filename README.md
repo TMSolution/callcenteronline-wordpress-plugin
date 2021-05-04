@@ -2,6 +2,7 @@
 
 Author: Jacek Łoziński
 Tags: call button, click to call, call now button, call me, contact button, call center online, cco
+
 Requires at least: 3.7
 Tested up to: 5.7.1
 License: GPLv2 or later
