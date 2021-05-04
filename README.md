@@ -1,4 +1,4 @@
-== Call Center Online ==
+### Call Center Online
 <br />
 Author: Jacek Łoziński<br />
 Tags: call button, click to call, call now button, call me, contact button, call center online, cco<br />
@@ -10,7 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html<br />
 A simple-to-use plugin that works with the Call Center Online platform. Adds a button to collect contacts on your website.<br />
 <br />
 <br />
-== Description ==<br />
+## Description <br />
 <br />
 ###What is this plugin for?
 
@@ -22,7 +22,7 @@ The plug-in is configured in the Administration Panel (Settings> Call Center Onl
 First, you must enter the API access data. You will get this information from your commercial supervisor.
 You can also enter all texts, button names and color.
 
-== Instalation ==
+## Instalation
 
 1. From the WordPress Dashboard, go to "Plugins"> "Add New" and search for "Call Center Online".
 2. Click "Install" under the "Call Center Online" plug-in.
