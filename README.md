@@ -1,4 +1,4 @@
-### Call Center Online
+#### Call Center Online
 
 <br />
 Author: Jacek Łoziński<br />
@@ -13,11 +13,11 @@ A simple-to-use plugin that works with the Call Center Online platform. Adds a b
 
 ## Description
 
-###What is this plugin for?
+# What is this plugin for?
 
 The plugin allows for integration via the API interface with the Call Center Online platform (https://callcenteronline.pl).
 
-###How to configure the plugin?
+# How to configure the plugin?
 
 The plug-in is configured in the Administration Panel (Settings> Call Center Online).
 First, you must enter the API access data. You will get this information from your commercial supervisor.
