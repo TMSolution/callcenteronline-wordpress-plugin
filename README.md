@@ -9,6 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A simple-to-use plugin that works with the Call Center Online platform. Adds a button to collect contacts on your website.
 
+
 == Description ==
 
 ###What is this plugin for?
