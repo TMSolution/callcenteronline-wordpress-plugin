@@ -17,7 +17,7 @@ A simple-to-use plugin that works with the Call Center Online platform. Adds a b
 
 ### What is this plugin for?
 
-The plugin allows for integration via the API interface with the Call Center Online platform (https://callcenteronline.pl).
+The plugin allows for integration via the API interface with the Call Center Online platform [Call Center Online](https://callcenteronline.pl).
 
 ### How to configure the plugin?
 
