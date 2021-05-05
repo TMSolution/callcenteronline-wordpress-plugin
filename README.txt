@@ -1,8 +1,8 @@
 === Call Center Online ===
 Author: Jacek Łoziński (Call Center Online Sp. z o.o.)
 Tags: call button, click to call, call now button, call me, contact button, call center online, cco, callcenteronline
-Stable tag: 1.0.0
-Version: 1.0.0
+Stable tag: 1.0.2
+Version: 1.0.2
 Requires at least: 3.7
 Tested up to: 5.7.1
 License: GPLv2 or later
