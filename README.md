@@ -1,8 +1,10 @@
 # Call Center Online - Wordpress Plugin
 
 <br />
-Author: Jacek Łoziński<br />
-Tags: call button, click to call, call now button, call me, contact button, call center online, cco<br />
+Author: Jacek Łoziński (Call Center Online Sp. z o.o.)<br />
+Tags: call button, click to call, call now button, call me, contact button, call center online, cco, callcenteronline<br />
+Stable tag: 1.0.0<br />
+Version: 1.0.0<br />
 Requires at least: 3.7<br />
 Tested up to: 5.7.1<br />
 License: GPLv2 or later<br />

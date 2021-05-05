@@ -20,7 +20,8 @@ class cco_call_me_admin
 
     public function cco_admin_stylesheet_url()
     {
-        echo '<link rel="stylesheet" href="' . plugin_dir_url(__DIR__) . 'css/style.css?build=' . date("Ymd", strtotime('-24 days')) . '" type="text/css" media="screen" />';
+        $ccoStylePath = plugin_dir_url(__FILE__).'../css/style.css';
+        wp_enqueue_style('cco-admin-style', $ccoStylePath, array(), '0.1.0', 'all');
     }
 
     public function add_cco_admin_page()
@@ -250,21 +251,17 @@ class cco_call_me_admin
 
     public function sanitize($input)
     {
-        // $new_input = array();
-        // if( isset( $input['cco_id'] ) )
-        //     $new_input['cco_id'] = sanitize_text_field( $input['cco_id'] );
-
         return $input;
     }
 
     public function section_1_callback()
     {
-        echo 'Wprowadź dane dostępowe do API systemu Call Center Online. Jeżeli ich nie posiadasz zwróc się do swojego opiekuna lub zadzwoń na numer 71 60 60 920.';
+        echo CCO_CONFIG_TEXT_SECTION_ACCESS_DATA_DESCRIPTION;
     }
 
     public function section_2_callback()
     {
-        echo 'Skonfiguruj parametry wtyczki aby dopasowac ją do wyglądu Twojej witryny.';
+        echo CCO_CONFIG_TEXT_SECTION_CONFIGURATION_DESCRIPTION;
     }
 
     public function endpoint_callback()
@@ -471,16 +468,11 @@ class cco_call_me_admin
 
     public function fields_callback()
     {
-        // if ($this->options['campaign']) {
-        //     $getAllFieldsFromApi = new cco_api($this->options);
-        //     $struct = $getAllFieldsFromApi->getCampaignStructure();
-        // }
 
         if (isset($this->options['fields'])) {
             $fields = esc_attr($this->options['fields']);
         }
         echo '<textarea class="cco-admin-field-style" id="fields" name="cco[fields]">' . $fields . '</textarea>';
-        //echo '<select multiple class="cco-admin-field" type="text" id="fields" name="cco[fields]" value="' . $fields . '"></select>';
     }
 
     public function names_mapper_callback()

@@ -20,7 +20,8 @@ class cco_call_me_content
     }
     public function cco_stylesheet_url()
     {
-        echo '<link rel="stylesheet" href="' . plugin_dir_url(__DIR__) . 'css/style.css?build=' . date("Ymd", strtotime('-24 days')) . '" type="text/css" media="screen" />';
+        $ccoStylePath = plugin_dir_url(__FILE__).'../css/style.css';
+        wp_enqueue_style('cco-style', $ccoStylePath, array(), '0.1.0', 'all');
     }
 
     protected function prepare_form()
@@ -67,7 +68,7 @@ class cco_call_me_content
             ($this->options['button_position_y'] === 'center' ? 'top' : ($this->options['button_position_y'] ? $this->options['button_position_y'] : 'bottom'))
             .
             ($this->options['button_position_y'] === 'center' ? ':50%;' : ':30px;')
-            . 'background-image: url('. CCO_CONFIG_BUTTON_IMAGE.');' .'"></button>
+            . 'background-image: url('. (plugin_dir_url(__FILE__)."../image/logo-390.png").');' .'"></button>
              ';
     }
 
@@ -75,174 +76,56 @@ class cco_call_me_content
     {
         $getAllFieldsFromApi = new cco_api($this->options);
         $token = $getAllFieldsFromApi->getToken();
-        ?>
-			<script>
 
-            function validateField(element){
+        $textBefore = $this->options['text_before'] ? $this->options['text_before'] : CCO_DEFAULT_TEXT_BEFORE;
+        $textAfter = $this->options['text_after'] ? $this->options['text_after'] : CCO_DEFAULT_TEXT_AFTER;
+        $buttonCancel = $this->options['button_cancel'] ? $this->options['button_cancel'] : CCO_DEFAULT_BUTTON_CANCEL;
+        $buttonSend = $this->options['button_send'] ? $this->options['button_send'] : CCO_DEFAULT_BUTTON_SEND;
+        $buttonClose = $this->options['button_close'] ? $this->options['button_close'] : CCO_DEFAULT_BUTTON_CLOSE;
+        $contactStatus = $this->options["contact_status"]?$this->options["contact_status"]:CCO_DEFAULT_CONTACT_STATUS;
+        $consent = $this->options['consent'];
+        $form = $this->prepare_form();
+        $color = $this->options['color'];
+        $imageDir = plugin_dir_url(__DIR__) . 'image/logo-mini.png';
+        $textSuccess = $this->options["text_success"];
+        $textFailed = $this->options["text_failed"];
+        $campaign = $this->options["campaign"];
+        $endpoint = $this->options["endpoint"];
+        $defaultPriority = CCO_DEFAULT_CONTACT_PRIORITY;
 
-                var valid=true;
-                if(element.required && !element.value.length){
-                        valid = false;
-                    }
+        $ccoJsPath = plugin_dir_url(__FILE__).'../js/script.js';
 
-                    if(element.min && element.value && (element.value*1) < (element.min*1)){
-                        valid = false;
-                    }
-
-                    if(element.max && element.value && (element.value*1) > (element.max*1)){
-                        valid = false;
-                    }
-                    if(valid){
-                        element.setAttribute('style', 'border-color:rgb(128, 128, 128) !important');
-                    }
-                    else{
-                        element.setAttribute('style', 'border-color:#ff0000 !important');
-                    }
-
-                    return valid;
-
-             }
-
-
-             function ccoOnClick(type){
-                document.getElementById('cco-mask').style.display = type;
-                document.getElementById('cco-modal').style.display = type;
-             }
-
-             function startMessage(){
-                 document.getElementById("cco-message").innerHTML='<div class="cco-body">'
-                            +'<div class="cco-text-before"><?php echo ($this->options['text_before'] ? $this->options['text_before'] : CCO_DEFAULT_TEXT_BEFORE); ?></div>'
-                            +'<div><?php echo $this->prepare_form(); ?></div>'
-                            +'<div class="cco-text-after"><?php echo ($this->options['text_after'] ? $this->options['text_after'] : CCO_DEFAULT_TEXT_AFTER); ?></div>'
-                        +'</div>'
-                        +'<div class="cco-container-buttons">'
-                            +'<div class="cco-buttons">'
-                            +'<button id="cco-button-cancel" class="cco-modal-button cco-modal-button-secondary" style="border-color:<?php echo $this->options['color']; ?>;"><?php echo ($this->options['button_cancel'] ? $this->options['button_cancel'] : CCO_DEFAULT_BUTTON_CANCEL); ?></button>'
-                            +'<button id="cco-button-send" class="cco-modal-button cco-modal-button-primary" style="border-color:<?php echo $this->options['color']; ?> !important;background-color:<?php echo $this->options['color']; ?> !important;"><?php echo ($this->options['button_send'] ? $this->options['button_send'] : CCO_DEFAULT_BUTTON_SEND); ?></button>'
-                            +'</div>'
-                            +'<div class="cco-container-powered-by">'
-                            +("<?php echo $this->options['consent']; ?>" == "on" ? "<a href=\"https://callcenteronline.pl\" target=\"_blank\" class=\"cco-powered-by\"><div class=\"cco-powered-by-text\">Połączy nas</div><img class=\"cco-powered-by-image\" src=\"<?php echo plugin_dir_url(__DIR__) . 'image/logo-mini.png'; ?>\"/></a>" : "")
-                            +'</div>'
-                        '</div>';
-             }
-
-             function endMessage(isOK=true){
-                 document.getElementById("cco-message").innerHTML='<div class="cco-body cco-body-end">'
-                            +(isOK==true?'<?php echo $this->options["text_success"]; ?>':'<?php echo $this->options["text_failed"]; ?>')
-                            +'</div>'
-                            +'<div class="cco-container-buttons">'
-                                +'<div class="cco-buttons cco-buttons-end">'
-                                    +'<button id="cco-button-end" onclick="ccoOnClick(\'none\')" class="cco-modal-button cco-modal-button-secondary" style="border-color:<?php echo $this->options['color']; ?> !important;"><?php echo ($this->options['button_close'] ? $this->options['button_close'] : CCO_DEFAULT_BUTTON_CLOSE); ?></button>'
-                                +'</div>'
-                                +'<div class="cco-container-powered-by">'
-                                    +("<?php echo $this->options['consent']; ?>" == "on" ? "<a href=\"https://callcenteronline.pl\" target=\"_blank\" class=\"cco-powered-by\"><div class=\"cco-powered-by-text\">Połączy nas</div><img class=\"cco-powered-by-image\" src=\"<?php echo plugin_dir_url(__DIR__) . 'image/logo-mini.png'; ?>\"/></a>" : "")
-                                +'</div>'
-                            '</div>';
-             }
-
-             function addEvents(){
-                document.getElementById('cco-button-send').addEventListener('click',function(){
-                    //console.debug(document.forms['cco-form'].elements);
-                    document.forms['cco-form'].submit();
-
-                });
-
-                document.getElementById('cco-button-cancel').addEventListener('click',function(){
-                    ccoOnClick("none")
-                });
-
-                document.forms['cco-form'].submit=function (){
-                    sendData(this.elements)
-                    return false;
-                }
-             }
-
-             function validateForm(elements){
-
-                var valid=true;
-
-                for (var i = 0, element; element = elements[i++];) {
-                    if (!validateField(element)){
-                        valid=false;
-                    }
-                }
-
-                return valid;
-             }
-
-             function sendData(elements){
-
-                if(validateForm(elements)){
-
-
-
-                var businessParameters={};
-
-                for (var i = 0, element; element = elements[i++];) {
-                    businessParameters[element.name.replace('*','')]=element.value;
-                }
-
-                var data = {
-                    'campaignId': '<?php echo $this->options["campaign"]; ?>',
-                    'priority': '100',
-                    'statusId':'<?php echo $this->options["contact_status"]?$this->options["contact_status"]:CCO_DEFAULT_CONTACT_STATUS; ?>',
-                    'businessParams': JSON.stringify(businessParameters)
-                };
-
-                var xmlhttp = new XMLHttpRequest();
-
-
-
-                xmlhttp.onreadystatechange = function() {
-
-                    if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
-                        if (xmlhttp.status == 200 || xmlhttp.status == 201) {
-                            //document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
-                            endMessage(true)
-
-                        }
-                        else {
-                            endMessage(false)
-                        }
-                    }
-                };
-
-                let uri = '<?php echo $this->options['endpoint']; ?>/api/contact/new?access_token=<?php echo $token; ?>';
-                xmlhttp.open("POST", uri, true);
-                //xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xmlhttp.send(JSON.stringify(data));
-             }
-            }
-
-             document.getElementById('cco-button-open').addEventListener('click',function(){
-                if(document.getElementById('cco-mask').style.display=="block"){
-                    ccoOnClick("none")
+        $scriptData = "
+            document.getElementById('cco-button-open').addEventListener('click',function(){
+                if(document.getElementById('cco-mask').style.display==\"block\"){
+                    ccoOnClick(\"none\")
                 }
                 else{
-                    startMessage();
-                    addEvents();
-                    ccoOnClick("block")
+                    startMessage('".$textBefore."','".$textAfter."','".$form."', '".$color."', '".$buttonCancel."', '".$buttonSend."','".$consent."', '".$imageDir."')
+                    addEvents('".$textSuccess."', '".$textFailed."', '".$consent."', '".$color."', '".$buttonClose."', '".$imageDir."', '".$campaign."', '".$contactStatus."', '".$token."', '".$endpoint."',".$defaultPriority.");
+                    ccoOnClick(\"block\")
 
                 }
-             })
+            })
 
 
-             document.getElementById('cco-button-cancel-x').addEventListener('click',function(){
-                ccoOnClick("none")
-             });
+            document.getElementById('cco-button-cancel-x').addEventListener('click',function(){
+                ccoOnClick(\"none\")
+            });
 
-             document.getElementById('cco-mask').addEventListener('click',function(){
-                ccoOnClick("none")
-             });
+            document.getElementById('cco-mask').addEventListener('click',function(){
+                ccoOnClick(\"none\")
+            });
 
-             document.addEventListener("keydown", ({key}) => {
-                if (key=="Escape" && document.getElementById('cco-mask').style.display=="block"){
-                    ccoOnClick("none")
+            document.addEventListener(\"keydown\", ({key}) => {
+                if (key==\"Escape\" && document.getElementById('cco-mask').style.display==\"block\"){
+                    ccoOnClick(\"none\")
                 }
-             })
+            })
+        ";
 
-			</script>
-		<?php
+        wp_enqueue_script( 'cco-script', $ccoJsPath );
+        wp_add_inline_script( 'cco-script', $scriptData, "after");
 
     }
 }

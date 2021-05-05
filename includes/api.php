@@ -11,53 +11,32 @@ class cco_api
     public function getToken()
     {
 
-        $curlHandler = curl_init();
-        $uri = sprintf('%s/oauth/v2/token?',
+        $uri = sprintf('%s/oauth/v2/token',
             $this->options['endpoint']
         );
 
-        $params = sprintf('grant_type=password&client_id=%s&client_secret=%s&username=%s&password=%s',
-            $this->options['client_id'],
-            $this->options['client_secret'],
-            $this->options['login'],
-            $this->options['password']
+        $body = array(
+            'grant_type' => 'password',
+            'client_id' => $this->options['client_id'],
+            'client_secret' => $this->options['client_secret'],
+            'username' => $this->options['login'],
+            'password' => $this->options['password'],
         );
 
-        curl_setopt($curlHandler, CURLOPT_URL, $uri);
-        curl_setopt($curlHandler, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($curlHandler, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curlHandler, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curlHandler, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($curlHandler, CURLINFO_HEADER_OUT, true);
-        curl_setopt($curlHandler, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($curlHandler, CURLOPT_POSTFIELDS, $params);
+        $args = array(
+            'body' => $body,
+            'timeout' => '5',
+            'redirection' => '5',
+            'httpversion' => '1.0',
+            'blocking' => true,
+            'headers' => array(),
+            'cookies' => array(),
+        );
 
-        $tokenObject = json_decode(curl_exec($curlHandler));
-        curl_close($curlHandler);
+        $response = wp_remote_post($uri, $args);
+        $tokenObject = json_decode($response['body']);
 
         return $tokenObject->access_token;
-
-    }
-
-    public function getCampaignStructure()
-    {
-        $token = $this->getToken();
-
-        $uri = sprintf('%s/api/campaign/structure?access_token=%s&campaignId=%s', $this->options['endpoint'], $token, $this->options['campaignid']);
-
-        $curlHandler = curl_init();
-
-        curl_setopt($curlHandler, CURLOPT_URL, $uri);
-        $data_string = json_encode($data);
-        curl_setopt($curlHandler, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($curlHandler, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curlHandler, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curlHandler, CURLINFO_HEADER_OUT, true);
-        curl_setopt($curlHandler, CURLOPT_FOLLOWLOCATION, true);
-        $info = curl_getinfo($curlHandler);
-        $result = json_decode(curl_exec($curlHandler));
-        $httpCode = curl_getinfo($curlHandler, CURLINFO_HTTP_CODE);
-        curl_close($curlHandler);
 
     }
 
@@ -67,25 +46,32 @@ class cco_api
 
         $uri = sprintf('%s/api/campaigns/list?access_token=%s', $this->options['endpoint'], $token);
 
-        $curlHandler = curl_init();
+        $body = array(
+            'grant_type' => 'password',
+            'client_id' => $this->options['client_id'],
+            'client_secret' => $this->options['client_secret'],
+            'username' => $this->options['login'],
+            'password' => $this->options['password'],
+        );
 
-        curl_setopt($curlHandler, CURLOPT_URL, $uri);
-        curl_setopt($curlHandler, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($curlHandler, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curlHandler, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curlHandler, CURLINFO_HEADER_OUT, true);
-        curl_setopt($curlHandler, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($curlHandler, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
-        ));
-        $info = curl_getinfo($curlHandler);
-        $result = json_decode(json_decode(curl_exec($curlHandler)));
-        $httpCode = curl_getinfo($curlHandler, CURLINFO_HTTP_CODE);
-        curl_close($curlHandler);
-        if (is_array($result->data)) {
+        $args = array(
+            'timeout' => '5',
+            'redirection' => '5',
+            'httpversion' => '1.0',
+            'blocking' => true,
+            'headers' => array(
+                'Content-Type' => ' application/json',
+            ),
+            'cookies' => array(),
+        );
+
+        $response = wp_remote_get($uri, $args);
+        $decodedResponse = json_decode(json_decode($response['body']));
+  
+        if (is_array($decodedResponse->data)) {
 
             $camps = [];
-            foreach ($result->data as $campaign) {
+            foreach ($decodedResponse->data as $campaign) {
                 if ($campaign->active) {
                     $camp = new \stdClass();
                     $camp->id = $campaign->id;
@@ -93,7 +79,7 @@ class cco_api
                     $camps[] = $camp;
                 }
             }
-
+            
             return $camps;
         }
         return [];

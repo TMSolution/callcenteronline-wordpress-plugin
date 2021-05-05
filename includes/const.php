@@ -7,6 +7,7 @@ const CCO_DEFAULT_BUTTON_CANCEL="Rezygnuj";
 const CCO_DEFAULT_BUTTON_CLOSE="Zamknij";
 const CCO_DEFAULT_BUTTON_SEND="Wyślij";
 const CCO_DEFAULT_CONTACT_STATUS=2;
+const CCO_DEFAULT_CONTACT_PRIORITY=100;
 const CCO_CONTACT_STATUSES=[
     "2" => "Start",
     "14" => "Super Start",
@@ -15,7 +16,9 @@ const CCO_CONTACT_STATUSES=[
 ];
 
 const CCO_CONFIG_TEXT_SECTION_CONFIGURATION = "Konfiguracja";
+const CCO_CONFIG_TEXT_SECTION_CONFIGURATION_DESCRIPTION = "Skonfiguruj parametry wtyczki aby dopasowac ją do wyglądu Twojej witryny.";
 const CCO_CONFIG_TEXT_SECTION_ACCESS_DATA = "Dane dostępowe";
+const CCO_CONFIG_TEXT_SECTION_ACCESS_DATA_DESCRIPTION = "Wprowadź dane dostępowe do API systemu Call Center Online. Jeżeli ich nie posiadasz zwróc się do swojego opiekuna lub zadzwoń na numer 71 60 60 920.";
 const CCO_CONFIG_TEXT_FIELDS = "Oznacz pola z kampanii, które mają pojawić się w formularzu. Dodaj gwiazdkę(*) na końcu nazwy jeśli chcesz aby pole było wymagane.";
 const CCO_CONFIG_TEXT_MAPPER = "Mapowanie nazw z kampanii w formacje JSON. Przykład dla pola UWAGI: {\"UWAGI\":\"NOWA NAZWA\"}";
 const CCO_CONFIG_TEXT_STATUS = "Wybierz status kontaktu";
@@ -38,7 +41,6 @@ const CCO_CONFIG_TEXT_CLIENT_ID = "Identyfikator klienta";
 const CCO_CONFIG_TEXT_SECRET = "Klucz klienta";
 const CCO_CONFIG_TEXT_ENDPOINT = "Endpoint";
 
-const CCO_CONFIG_BUTTON_IMAGE = "./wp-content/plugins/call-center-online/image/logo-390.png";
 
 
 

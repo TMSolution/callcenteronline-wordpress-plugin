@@ -4,7 +4,8 @@
 Plugin Name: Call Center Online
 Plugin URI: https://callcenteronline.pl
 Description: A simple-to-use plugin that works with the Call Center Online platform. Adds a button to collect contacts on your website.
-Version: 1.0
+Stable tag: 1.0
+Version: 1.0.0
 Author: Jacek Łoziński
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
